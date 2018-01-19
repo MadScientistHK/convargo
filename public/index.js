@@ -196,10 +196,15 @@ for (var i =0; i<deliveries.length;i++) {
  
 function infoTruckers(searchId) 
 { 
-    for (var i = 0; i < truckers.length; i++) { 
+    for (var i = 0; i < truckers.length; i++) {
+	if(deliveries[i].deductibleReduction=false){  
       if (searchId == truckers[i].id) { 
         return [truckers[i].pricePerKm,truckers[i].pricePerVolume]; 
-      } 
+      }
+	}
+	else{
+			return [truckers[i].pricePerKm,truckers[i].pricePerVolume+1]; 
+		}	  
     } 
 } 
  

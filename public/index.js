@@ -155,19 +155,21 @@ for (var i =0; i<deliveries.length;i++) {
 	{
 		decreasing = 0.1;
 	}
-	else {
-		if(deliveries[i].volume >= 10 && deliveries[i].volume < 25)
-		{
-			decreasing = 0.3;
-		}
-		else{
-			if(deliveries[i].volume >= 25)
-			{
-				decreasing = 0.5;
-			}
+	if(deliveries[i].volume >= 10 && deliveries[i].volume < 25)
+	{
+		decreasing = 0.3;
 	}
-}
-    tab[i] =(deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1])-(deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1])*decreasing; 
+	if(deliveries[i].volume >= 25)
+	{
+		decreasing = 0.5;
+	}
+	
+	var price = (deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1]); 
+	decreasing =price*decreasing; 
+	
+	var result = price-decreasing; 
+	
+    tab[i] = result;
 } 
  
 function infoTruckers(searchId) 

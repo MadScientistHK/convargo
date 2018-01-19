@@ -148,9 +148,26 @@ const actors = [{
 
 // Step 1 
 var tab=[0,0,0]; 
+var decreasing = 0;
 for (var i =0; i<deliveries.length;i++) { 
-    var infoTruck = infoTruckers(deliveries[i].truckerId); 
-    tab[i] = deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1]; 
+    var infoTruck = infoTruckers(deliveries[i].truckerId);
+	if(deliveries[i].volume >= 5 && deliveries[i].volume < 10)
+	{
+		decreasing = 0.1;
+	}
+	else {
+		if(deliveries[i].volume >= 10 && deliveries[i].volume < 25)
+		{
+			decreasing = 0.3;
+		}
+		else{
+			if(deliveries[i].volume >= 25)
+			{
+				decreasing = 0.5;
+			}
+	}
+}
+    tab[i] =(deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1])-(deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1])*decreasing; 
 } 
  
 function infoTruckers(searchId) 

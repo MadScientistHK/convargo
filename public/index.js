@@ -147,7 +147,23 @@ const actors = [{
 
 
 // Step 1 
-var tab=[0,0,0]; 
+var tabRes=[{
+	'price': 0,
+  'commission': {
+    'insurance': 0,
+    'treasury': 0,
+    'convargo': 0
+  }},{'price': 0,
+  'commission': {
+    'insurance': 0,
+    'treasury': 0,
+    'convargo': 0
+  }},{'price': 0,
+  'commission': {
+    'insurance': 0,
+    'treasury': 0,
+    'convargo': 0
+  }}]; 
 var decreasing = 0;
 for (var i =0; i<deliveries.length;i++) { 
     var infoTruck = infoTruckers(deliveries[i].truckerId);
@@ -166,10 +182,16 @@ for (var i =0; i<deliveries.length;i++) {
 	
 	var price = (deliveries[i].distance*infoTruck[0] + deliveries[i].volume*infoTruck[1]); 
 	decreasing =price*decreasing; 
+	var resultPrice = price-decreasing; 
+	var commission = resultPrice*0.3;
+	var insurance  = commission/2;
+	var treasury = Math.floor(deliveries[i].distance/500)+1;
+	var convargo = commission-insurance-treasury;
 	
-	var result = price-decreasing; 
-	
-    tab[i] = result;
+    tabRes[i].price = resultPrice;
+	tabRes[i].commission.insurance = insurance;
+	tabRes[i].commission.treasury = treasury;
+	tabRes[i].commission.convargo = convargo;
 } 
  
 function infoTruckers(searchId) 
@@ -182,7 +204,7 @@ function infoTruckers(searchId)
 } 
  
  
-console.log(tab);
+console.log(tabRes);
 
 
 console.log(truckers);

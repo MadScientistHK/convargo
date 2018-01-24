@@ -207,10 +207,31 @@ function infoTruckers(searchId)
 		}	  
     } 
 } 
- 
+
+//Step 5
+function PayTheActors()
+{
+  for(var i = 0; i<deliveries.length;i++)
+  {
+    for(var j = 0; j<actors.length;j++)
+    {
+      if(actors[j].deliveryId == deliveries[i].id)
+      {
+        var truckerAmount = deliveries[i].price*0.7;
+
+        actors[j].payment[0].amount = deliveries[i].price;
+        actors[j].payment[1].amount = truckerAmount;
+        actors[j].payment[2].amount = deliveries[i].commission.insurance;
+        actors[j].payment[3].amount = deliveries[i].commission.treasury;
+        actors[j].payment[4].amount = deliveries[i].commission.convargo;
+
+      }
+    }
+  }   
+}
  
 console.log(tabRes);
-
+PayTheActors()
 
 console.log(truckers);
 console.log(deliveries);
